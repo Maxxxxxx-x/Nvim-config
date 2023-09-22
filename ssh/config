@@ -1,0 +1,8 @@
+Host "dorm"
+    HostName "172.23.0.152"
+
+
+Host "SA"
+    HostName sa-ssh.csie.cool
+    ProxyCommand cloudflared access ssh --hostname %h
+    IdentityFile ~/.ssh/CSIE_SA
