@@ -3,10 +3,10 @@ local lsp = require("lsp-zero")
 lsp.preset("recommended")
 
 lsp.ensure_installed({
-    "tsserver",
-    "eslint",
-    "lua_ls",
+    "clangd",
+    "clang-format"
 })
+
 
 local cmp = require("cmp")
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
@@ -22,8 +22,10 @@ lsp.set_preferences({
 })
 
 lsp.setup_nvim_cmp({
-    mapping = cmp_mappings
+  mapping = cmp_mappings
 })
+
+
 
 lsp.on_attach(function(client, bufnr)
     local opts = {buffer = bufnr, remap = false}
@@ -40,3 +42,18 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.setup()
+
+require("lspconfig").luau_lsp.setup({
+    require("luau-lsp").setup {
+        sourcemap = {
+            enable = true,
+        },
+        types = {
+            roblox = true,
+        },
+        server = { -- options passed to `require("lspconfig").luau_lsp.setup`
+            filetypes = { "lua", "luau" }, -- default is { "luau" }
+            capabilities = vim.lsp.protocol.make_client_capabilities(), -- just an example
+        },
+    }
+})
