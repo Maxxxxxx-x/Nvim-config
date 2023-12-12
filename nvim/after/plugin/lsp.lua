@@ -42,18 +42,3 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.setup()
-
-require("lspconfig").luau_lsp.setup({
-    require("luau-lsp").setup {
-        sourcemap = {
-            enable = true,
-        },
-        types = {
-            roblox = true,
-        },
-        server = { -- options passed to `require("lspconfig").luau_lsp.setup`
-            filetypes = { "lua", "luau" }, -- default is { "luau" }
-            capabilities = vim.lsp.protocol.make_client_capabilities(), -- just an example
-        },
-    }
-})
